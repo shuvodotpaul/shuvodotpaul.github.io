@@ -1,0 +1,923 @@
+@import "settings";
+//variables
+$borderColor: rgba(144, 144, 144, 0.35);
+$border: 1px solid $borderColor;
+$baseColor: #66ac66,
+#56b6da,
+#6977cd,
+#c16ea6;
+$grayColor: #777777;
+$grayText: #484b49;
+$gutter: 0.9375rem;
+$primaryButtonColor: #FA7532;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    letter-spacing: 2px;
+}
+@mixin anchor {
+        color: $grayColor!important;
+        text-decoration: underline!important;
+        &:hover {
+        color: $grayColor;
+        text-decoration: none!important;
+    }
+}
+
+@mixin headline {
+    display: inline-block;
+    padding: 0rem 0 0.8em;
+    margin: 0 0 0.8em;
+    font-size: 25px;
+    text-transform: capitalize;
+}
+
+@mixin middleBorder {
+    position: relative;
+    padding: 6em 0 6em;
+    @include breakpoint(small only) {
+        padding: 3rem 0;
+    }
+    &:before {
+        background-color: rgba(144, 144, 144, 0.35);
+        content: "";
+        display: block;
+        height: 100%;
+        position: absolute;
+        right: 50%;
+        top: 0;
+        width: 1px;
+    }
+}
+@mixin primaryButton {
+    background: $primaryButtonColor;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-family: $bodyFont;
+    color: $white!important;
+    text-decoration: none!important;
+    @include breakpoint(small only) {
+        font-size: 12px;
+    }
+    &:hover {
+        background: lighten($primaryButtonColor, 5%);
+    }
+}
+@mixin formStyle {
+    border-bottom: $border;
+    border-width: 2px;
+    background-color: transparent;
+    padding: 0;
+    &:focus {
+        border-bottom: 2px solid #f2849e;
+        background: transparent;
+    }
+}
+@mixin iCons {
+    background: #e6e6e6 none repeat scroll 0 0;
+    height: 20px;
+    position: relative;
+    top: 15px;
+    width: 34px;
+    &:after {
+        border-left: 17px solid transparent;
+        border-right: 17px solid transparent;
+        border-top: 9px solid #e6e6e6;
+        bottom: -9px;
+        content: "";
+        height: 0;
+        left: 0;
+        position: absolute;
+        width: 0;
+    }
+    &:before {
+        border-bottom: 9px solid #e6e6e6;
+        border-left: 17px solid transparent;
+        border-right: 17px solid transparent;
+        content: "";
+        height: 0;
+        left: 0;
+        position: absolute;
+        top: -9px;
+        width: 0;
+    }
+    .fa {
+        left: 50%;
+        position: absolute;
+        transform: translateX(-50%);
+    }
+}
+
+
+a:focus {
+    outline: 0;
+}
+.off-canvas-content {
+    -webkit-user-select: text!important;  
+  -moz-user-select: text!important;     
+  -ms-user-select: text!important;     
+  user-select: text!important;
+  z-index: 99999;  
+}
+.contentBox {
+    background-color: $white;
+}
+
+.js-off-canvas-exit {
+    z-index: 999;
+}
+
+.off-canvas {
+    height: 100%;
+    padding: 0 10px;
+    position: fixed !important;
+    top: 0;
+    transition: transform 0.5s ease 0s, -webkit-transform 0.5s ease 0s;
+    .menu {
+        a {
+            font-size: 14px;
+            text-transform: uppercase;
+        }
+        .nested {
+            margin-left: 0px;
+            li {
+                a {
+                    font-size: 13px;
+                    color: lighten($grayText, 20%);
+                    padding-left: 2rem;
+                    text-transform: uppercase;
+                }
+            }
+            .nested {
+                li {
+                    a {
+                        padding-left: 3rem;
+                    }
+                }
+            }
+        }
+        li {
+            a {
+                border-bottom: $border;
+                color: $grayText;
+            }
+            &.signUp {
+                a {
+                    border: none;
+                }
+            }
+        }
+    }
+}
+
+.off-canvas-wrapper-inner.is-off-canvas-open.is-open-left {
+    transform: translateX(0px);
+}
+
+.off-canvas.position-left.is-open {
+    transform: translateX(250px);
+}
+
+header {
+    position: relative;
+    .title-bar.mobileNav{
+        background: $white!important;
+        z-index: 999;
+        border-bottom: $border;
+        position: fixed;
+        top: 0;
+        transform: translateY(0px);
+        height: 48px;
+        display: none;
+        @include breakpoint(960px down){
+            display: block;
+        }
+    }
+    .desktopNav {
+        display: none;
+        @include breakpoint(961px up){
+            display: block;
+        }
+    }
+    .title-bar {
+        position: absolute;
+        top: 40px;
+        z-index: 999;
+        width: 100%;
+        transform: translateY(-20px);
+        transition: transform 0.5s ease 0s, -webkit-transform 0.5s ease 0s;
+        .title-bar-title {
+            img {
+                width: 330px;
+                @include breakpoint(960px down) {
+                    width: 250px;
+                }
+                @include breakpoint(small only) {
+                    width: 150px;
+                }
+            }
+            @include breakpoint(960px down) {
+                @include horizontal-center;
+            }
+        }
+        .menu {
+            a {
+                color: $white;
+                text-transform: uppercase;
+                white-space: nowrap;
+                margin-left: 30px;
+                &.button {
+                    @include breakpoint(960px up){
+                        @include primaryButton;
+                    }
+                }
+            }
+            .dropDownMenu {
+                background: $white;
+                left: -65% !important;
+                margin-top: 15px;
+                border: 1px solid rgba(144, 144, 144, 0.35);
+                padding: 0 20px;
+                &:before {
+                    background: #fff none repeat scroll 0 0;
+                    border-color: rgba(144, 144, 144, 0.35);
+                    border-style: solid;
+                    border-width: 1px 0 0 1px;
+                    content: "";
+                    display: block;
+                    height: 1em;
+                    position: absolute;
+                    right: 1em;
+                    top: -0.5em;
+                    transform: rotate(45deg);
+                    width: 1em;
+                }
+                .dropDownSubMenu {
+                    padding: 0 20px;
+                    left: -140% !important;
+                    //right: 100%!important;
+                }
+                li {
+                    padding: 0;
+                    &:not(:last-child) {
+                        border-bottom: $border;
+                    }
+                    a {
+                        color: $grayText;
+                        font-size: 0.8em;
+                        margin-left: 0;
+                        padding-left: 0;
+                    }
+                }
+            }
+        }
+        .title-bar-title {
+            @include breakpoint(small only) {
+                color: $grayText;
+            }
+        }
+    }
+    //end title bar
+    .orbit {
+        @include breakpoint(small only) {
+            margin-top: 40px;
+        }
+        .orbit-slide {
+            height: 700px;
+            background-position: center 0;
+            background-size: cover!important;
+            @include breakpoint(960px down){
+            background-position: center center!important;
+            height: 600px;
+            }
+            @include breakpoint(400px down){
+            height: 450px;
+            }
+            &.slide1 {
+            background: url('../images/slide01.jpg') no-repeat scroll transparent;
+            }
+            &.slide2 {
+                background: url('../images/slide02.jpg') no-repeat scroll transparent;
+            }
+            &.slide3 {
+                background: url('../images/slide03.jpg') no-repeat scroll transparent;
+            }
+        }
+        
+        
+        .orbit-caption {
+            color: $white;
+            font-family: $headerFont;
+            font-size: 32px;
+            bottom: 140px;
+            @include breakpoint(960px down){
+            bottom: 20%;
+            }
+            @include breakpoint(750px down) {
+                bottom: 23%;
+            }
+            h2 {
+                color: $white;
+                border-bottom: $border;
+                border-color: $white;
+                display: inline-block;
+                font-size: 2.8rem;
+                @include breakpoint(960px down){
+                font-size: 2.2rem;
+                }
+                
+                @include breakpoint(750px down) {
+                    font-size: 1.90rem;
+                }
+                @include breakpoint(400px down) {
+                    font-size: 1.25rem;
+                }
+            }
+            p {
+                font-size: 24px;
+                font-family: $bodyFont;
+                
+                @include breakpoint(750px down) {
+                    font-size: 18px;
+                }
+                @include breakpoint(400px down) {
+                    font-size: 16px;
+                }
+            }
+            a.button {
+                background: $primaryButtonColor;
+                text-transform: uppercase;
+                letter-spacing: 2px;
+                padding: 1rem 2rem;
+                font-family: $bodyFont;
+                @include breakpoint(small only) {
+                    font-size: 12px;
+                }
+                &:hover {
+                    background: lighten($primaryButtonColor, 5%);
+                }
+            }
+        }
+    }
+}
+
+//end header
+.one {
+    @include middleBorder;
+    .contentBox {
+        position: relative;
+        margin-right: $gutter;
+        margin-left: $gutter;
+        &:before,
+        &:after {
+            content: "";
+            display: block;
+            height: 4px;
+            position: absolute;
+            right: 0;
+            width: 100%;
+        }
+        &:before {
+            background: rgba(0, 0, 0, 0) linear-gradient(to right, nth($baseColor, 1) 50%, nth($baseColor, 2) 50%) repeat scroll 0 0;
+        }
+        &:after {
+            background: rgba(0, 0, 0, 0) linear-gradient(to right, nth($baseColor, 3) 50%, nth($baseColor, 4) 50%) repeat scroll 0 0;
+        }
+        h2 {
+            @include headline;
+            padding-top: 7rem;
+            @include breakpoint(small only) {
+                padding-top: 3rem;
+            }
+            border-bottom: $border;
+        }
+        p {
+            padding-bottom: 4rem;
+            color: lighten($grayText, 20);
+            @include breakpoint(small only) {
+                padding-bottom: 2rem;
+            }
+        }
+        .columns {
+            border-top: $border;
+            padding: 6em 4em 2em;
+            @include breakpoint (840px down) {
+                padding: 3em 2.5em 0em;
+            }
+            @include breakpoint (small only) {
+                padding: 3em 2em 0em;
+            }
+            &:nth-child(2n + 1) {
+                border-right: $border;
+                @include breakpoint(small only) {
+                    border-right: none;
+                }
+            }
+        }
+        h3 {
+            font-size: 18px;
+            margin: 1.5rem 0 1rem;
+        }
+        .fa-paper-plane {
+            color: nth($baseColor, 4);
+        }
+        .fa-area-chart {
+            color: nth($baseColor, 3);
+        }
+        .fa-briefcase {
+            color: nth($baseColor, 2);
+        }
+        .fa-database {
+            color: nth($baseColor, 1);
+        }
+    }
+}
+
+//end section one
+.two {
+    background-attachment: scroll, fixed;
+    background-image: url("../images/overlay.png"), url("../images/bannerTwo.jpg");
+    background-position: center center;
+    background-size: cover;
+    color: $white;
+    padding: 3rem 6rem;
+    @include breakpoint(small only) {
+        padding: 3rem 2rem;
+    }
+    h2 {
+        @include headline;
+        color: $white;
+        border-bottom: 1px solid;
+        border-color: $white;
+    }
+    p {
+        margin-bottom: 60px;
+    }
+    @for $i from 1 through 4 {
+        .column:nth-of-type(#{$i}) {
+            .box {
+                margin: 0 auto;
+                @include breakpoint(small only) {
+                    margin-bottom: 20px;
+                }
+                strong {
+                    background: nth($baseColor, $i);
+                    padding: 20px 0px;
+                    width: 100%;
+                    font-size: 36px;
+                    margin-bottom: 25px;
+                    display: inline-block;
+                }
+                p {
+                    margin: 0;
+                }
+            }
+        }
+    }
+}
+
+//end two
+.three {
+    @include middleBorder;
+    .columns {
+        @include breakpoint(small only) {
+            margin-top: 35px;
+        }
+        &:nth-of-type(1) {
+            .contentBox {
+                border-bottom: 4px solid nth($baseColor, 1);
+            }
+        }
+        &:nth-of-type(2) {
+            .contentBox {
+                border-bottom: 4px solid nth($baseColor, 2);
+            }
+        }
+        &:nth-of-type(3) {
+            .contentBox {
+                border-bottom: 4px solid nth($baseColor, 4);
+            }
+        }
+        .contentBox {
+            position: relative;
+            h3 {
+                font-size: 18px;
+                margin-top: 3rem;
+            }
+            p {
+                margin: 2rem;
+                color: #777777;
+            }
+            .button {
+                border: $border;
+                background: transparent;
+                color: $header-color;
+                letter-spacing: 2px;
+                text-transform: uppercase;
+                margin-bottom: 3rem;
+            }
+        }
+    }
+}
+
+//end three
+.four {
+    background: $white;
+    padding: 6rem 0;
+    @include breakpoint(small only) {
+        padding: 3rem 0;
+    }
+    h2 {
+        @include headline;
+        border-bottom: $border;
+    }
+    p {
+        color: #777777;
+        font-size: 18px;
+        margin-bottom: 1.5rem;
+    }
+    .button {
+        font-size: 14px;
+        text-transform: uppercase;
+        margin: 0 5px;
+        min-width: 11rem;
+        white-space: nowrap;
+        padding: 15px 0;
+        margin-bottom: 15px;
+        &:first-child {
+            background: $primaryButtonColor;
+            color: $white;
+            &:hover {
+                background: lighten($primaryButtonColor, 5%);
+            }
+        }
+        &:last-child {
+            box-shadow: 0 0 0 1px rgba(144, 144, 144, 0.35) inset;
+            background: transparent;
+            color: $grayText;
+            &:hover {
+                background: rgba(144, 144, 144, 0.075);
+            }
+        }
+    }
+}
+
+//end four
+footer {
+    padding-bottom: 2rem;
+    form {
+        input[type="text"],
+        textarea {
+            @include formStyle;
+        }
+    }
+    h2 {
+        @include headline;
+        font-size: 22px;
+        margin-top: 4rem;
+        @include breakpoint(small only) {
+            margin-top: 2rem;
+        }
+    }
+    .button {
+        background: #585858;
+        &:hover {
+            background: #787878;
+        }
+    }
+    .sendMessage,
+    .otherWay {
+        border-bottom: $border;
+    }
+    .sendMessage {
+        @include breakpoint(small only) {
+            padding-bottom: 2rem;
+        }
+    }
+    .otherWay {
+        border-left: $border;
+        ul li {
+            margin-bottom: 20px;
+            .iconWraper {
+                width: 34px;
+                height: 20px;
+                background: $light-gray;
+                position: relative;
+                top: 15px;
+                &:before {
+                    content: "";
+                    position: absolute;
+                    top: -9px;
+                    left: 0;
+                    width: 0;
+                    height: 0;
+                    border-left: 17px solid transparent;
+                    border-right: 17px solid transparent;
+                    border-bottom: 9px solid $light-gray;
+                }
+                &:after {
+                    content: "";
+                    position: absolute;
+                    bottom: -9px;
+                    left: 0;
+                    width: 0;
+                    height: 0;
+                    border-left: 17px solid transparent;
+                    border-right: 17px solid transparent;
+                    border-top: 9px solid $light-gray;
+                }
+                .fa {
+                    position: absolute;
+                    @include horizontal-center;
+                }
+            }
+            // end iconWraper
+            p {
+                padding-left: 45px;
+                small {
+                    display: block;
+                    color: $grayColor;
+                    font-size: 16px;
+                    a {
+                        color: $grayColor;
+                        border-bottom: $border;
+                        &:hover {
+                            border: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    // end otherway
+    .copyright {
+        padding-top: 50px;
+        clear: both;
+        p {
+            color: $grayColor;
+            font-size: 14px;
+        }
+        .menu {
+            a {
+                color: $grayColor;
+                font-size: 14px;
+                border-bottom: $border;
+                display: inline-block;
+                padding: 2px 0;
+                margin: 0 10px;
+                &:hover {
+                    border: none;
+                }
+            }
+        }
+    }
+}
+
+// left sidebar
+.left-sidebar {
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        text-transform: capitalize!important;
+        color: #24D783;
+    }
+    img {
+        border-radius: 4px!important;
+    }
+    .title-bar {
+        img {
+            margin-bottom: 0;
+            width: 250px!important;
+            border-radius: 0px;
+        }
+        @include breakpoint(960px up) {
+            background-color: #237CCC;
+            padding-top: 15px;
+        }
+    }
+    img {
+        width: 100%;
+        margin-bottom: 35px;
+    }
+    ul li, ol li,
+    p {
+        color: #5E6875;
+    }
+    .major {
+        margin-top: 85px;
+        margin-bottom: 35px;
+        z-index: 99;
+        &::after {
+            content: "";
+            display: inline-block;
+            height: 2px;
+            width: 4em;
+            background-color: rgba(144, 144, 144, 0.25);
+        }
+    }
+    hr {
+        margin: 50px 0;
+    }
+    .button {
+        background-color: transparent;
+        box-shadow: 0 0 0 2px rgba(144, 144, 144, 0.25) inset;
+        color: #4d5968 !important;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        &:hover {
+            background-color: rgba(144, 144, 144, 0.075);
+        }
+    }
+    .signUpBtn {
+        border: 1px solid $white;
+    }
+    footer {
+        border-top: $border;
+        margin-top: 55px;
+    }
+}
+
+// element page
+.elements {
+    p > a {
+        @include anchor;
+    }
+    pre {
+        background-color: #e6e6e6;
+        border: $border;
+        border-radius: 4px;
+        font-size: 0.9em;
+        code {
+            display: block;
+            border: none;
+            padding: 10px;
+            line-height: 1.75em;
+            overflow-x: auto;
+        }
+    }
+    .icons {
+        li {
+            margin: 0 5px;
+            display: inline-block;
+            span {
+                @include iCons;
+                .fa-lg {
+                    font-size: 20px!important;
+                    top: 2px;
+                }
+            }
+        }
+    }
+    .action {
+        margin-top: 10px;
+        .button {
+            margin: 10px 5px;
+            text-decoration: none!important;
+            &.primary {
+                @include primaryButton;
+            }
+        }
+    }
+    table {
+        margin-top: 15px;
+        th {
+            color: #4d5968;
+            font-size: 0.9em;
+            font-weight: 700;
+            padding: 0 0.75em 0.75em;
+        }
+        td {
+            color: #5E6875;
+            font-size: 0.9em;
+            font-weight: 300;
+            padding: 0.75em;
+        }
+        tbody tr {
+            border-top: $border;
+            &:nth-child(2n+1) {
+                background-color: #f1f1f1;
+            }
+        }
+        &.altr {
+            tbody tr {
+                td,
+                th {
+                    border-right: $border;
+                    &:first-child {
+                        border-left: $border;
+                    }
+                }
+                &:last-child {
+                    td,
+                    th {
+                        border-right: none;
+                        &:first-child {
+                            border-left: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+    //end table
+    form {
+        [type="text"],
+        [type="password"],
+        [type="date"],
+        [type="datetime"],
+        [type="datetime-local"],
+        [type="month"],
+        [type="week"],
+        [type="email"],
+        [type="number"],
+        [type="search"],
+        [type="tel"],
+        [type="time"],
+        [type="url"],
+        [type="color"],
+        textarea,
+        select {
+            @include formStyle;
+        }
+        fieldset {
+            input[type="radio"] {
+                display: none;
+            }
+            margin-bottom: 10px;
+            input[type="radio"] + label span {
+                background-color: $light-gray;
+                display: inline-block;
+                width: 1.65em;
+                height: 1.65em;
+                border-radius: 50%;
+                border: $border;
+                position: relative;
+                top: 5px;
+                margin-right: 5px;
+            }
+            input[type="radio"] + label span i.fa {
+                color: $white;
+                position: absolute;
+                left: 4px;
+                top: 4px;
+                display: none;
+            }
+            input[type="radio"]:checked + label span {
+                background-color: darken($medium-gray, 30);
+            }
+            input[type="radio"]:checked + label span i.fa{
+                display: block;
+            }
+            input[type="checkbox"] {
+                display: none;
+            }
+            input[type="checkbox"] + label span {
+                background-color: $light-gray;
+                display: inline-block;
+                width: 1.65em;
+                height: 1.65em;
+                border-radius: 4px;
+                border: $border;
+                position: relative;
+                top: 5px;
+                margin-right: 5px;
+            }
+            input[type="checkbox"] + label span i.fa {
+                color: $white;
+                position: absolute;
+                left: 4px;
+                top: 5px;
+                display: none;
+            }
+            input[type="checkbox"]:checked + label span {
+                background-color: darken($medium-gray, 30);
+            }
+            input[type="checkbox"]:checked + label span i.fa{
+                display: block;
+            }
+        }
+    }
+    img {
+        border-radius: 4px;
+    }
+    .left-right {
+        img {
+            width: 250px;
+            @include breakpoint(small only) {
+                width: 160px;
+            }
+            &.float-left {
+                margin: 0 15px 10px 0;
+            }
+            &.float-right {
+                margin: 0 0px 10px 15px;
+            }
+        }
+    }
+}

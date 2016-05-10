@@ -24,7 +24,8 @@ $(document).foundation();
      	});
         $(".desktopNav > .title-bar-title > a > img").attr('src', 'images/CollegeFundme_logo_black.png');
         $(".desktopNav > .title-bar-title > a > img").css({
-            width: '250px'
+            width: '250px',
+            'margin-top': '3px'
         });
      }
      else {
@@ -46,7 +47,8 @@ $(document).foundation();
      	});
         $(".desktopNav > .title-bar-title > a > img").attr('src', 'images/CollegeFundme_logo.png');
         $(".desktopNav > .title-bar-title > a > img").css({
-            width: '330px'
+            width: '330px',
+            'margin-top': '0px'
         });
      } //end header behavior in desktop
 	})
