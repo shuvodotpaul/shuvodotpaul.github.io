@@ -26,6 +26,4 @@ $(document).ready(function() {
 			$(idNumber).show();
 		}
 	});
-});
-
-$(document).foundation();																									
+});																								
