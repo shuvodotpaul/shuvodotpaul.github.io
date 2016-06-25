@@ -1,5 +1,3 @@
-
-$.noConflict();
 jQuery(document).ready(function() {
 	jQuery('.table-tab li button').click(function(event) {
 		/* Act on the event */
