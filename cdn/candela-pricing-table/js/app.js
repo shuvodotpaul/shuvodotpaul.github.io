@@ -6,7 +6,7 @@ jQuery(document).ready(function() {
 		console.log(deactivated);
 		var activated = $(this).parent().index();
 		console.log(activated);
-		jQuery('.table-tab li').removeClass();
+		jQuery('.table-tab li').removeAttr('class');
 		jQuery(this).parent().addClass('active-tab');
 		jQuery('#hide').hide();
 
