@@ -4,7 +4,9 @@
 .pricing-table-container {
     margin-top: 100px;
 }
-
+.pricing-table-container table {
+    border: 1px solid #ddd!important;
+}
 .pricing-table-container table thead tr th,
 .pricing-table-container table tfoot tr th,
 .pricing-table-container table tfoot tr td,
@@ -49,9 +51,11 @@
     padding: 10px 15px;
     margin: 0;
     font-weight: bold;
+    border-width: 0!important;
 }
-.pricing-table-container ul.table-tab li.active-tab button {
-	background-color: #eaeaea;
+.pricing-table-container ul.table-tab li.active-tab button,
+.pricing-table-container ul.table-tab li button:hover {
+	background-color: #f08766;
 }
 .pricing-table-container .tables {
 	padding: 0 2px;
